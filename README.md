@@ -3,15 +3,13 @@
 
 download jar at https://github.com/Supergamer5465/Helix-Raid-Tool/releases
 
-Please make sure to follow these step-by-step guides so that you do not use the raid tool improperly
+Please make sure to follow this guide so that you do not use the raid tool improperly
 
 <details>
 <summary>Guide for Bot Raiding</summary>
   
 ### A step-by-step guide
   
-  1. Create a discord application at https://discord.com/developers
-  2. 
   1. Have admin privileges, or know another administrator that can add the bot for you
   2. Create a discord application at https://discord.com/developers
   3. In the application, go to the tab labeled "bot"
