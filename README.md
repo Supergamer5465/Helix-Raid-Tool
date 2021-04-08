@@ -1,6 +1,8 @@
 # Helix-Raid-Tool
 ## Discord raid tool for both user and bot raids.
 
+download jar at https://github.com/Supergamer5465/Helix-Raid-Tool/releases
+
 Please make sure to follow these step-by-step guides so that you do not use the raid tool improperly
 
 <details>
