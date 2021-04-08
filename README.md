@@ -1,5 +1,5 @@
 # Helix-Raid-Tool
-## Ultimate discord raid tool for both user and bot raids.
+## Discord raid tool for both user and bot raids.
 
 Please make sure to follow these step-by-step guides so that you do not use the raid tool improperly
 
@@ -30,4 +30,3 @@ Please make sure to follow these step-by-step guides so that you do not use the 
   
 </details>
 
-Thanks for reading my guide (if you did). Have fun.
