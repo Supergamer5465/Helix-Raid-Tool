@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -51,17 +52,18 @@ public class BotFrame extends JFrame {
 
 	public BotFrame() {
 		this.setDefaultCloseOperation(3);
-		this.setBounds(100, 100, 550, 550);
+		this.setBounds(100, 100, 650, 750);
 		(this.contentPane = new JPanel()).setBackground(Color.BLACK);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
 		final GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 225, 209 };
-		gbl_contentPane.rowHeights = new int[] { 23, 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 23, 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0,
-				Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0,
+				0.0, Double.MIN_VALUE };
 		this.contentPane.setLayout(gbl_contentPane);
+
 		// menu button
 		final JButton btnNewButton = new JButton("Menu");
 		btnNewButton.setForeground(Color.CYAN);
@@ -79,6 +81,7 @@ public class BotFrame extends JFrame {
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
 		this.contentPane.add(btnNewButton, gbc_btnNewButton);
+
 		final JLabel lblNewLabel = new JLabel("Enter Bot Token");
 		lblNewLabel.setBackground(Color.DARK_GRAY);
 		lblNewLabel.setForeground(Color.CYAN);
@@ -88,6 +91,7 @@ public class BotFrame extends JFrame {
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 1;
 		this.contentPane.add(lblNewLabel, gbc_lblNewLabel);
+
 		// bot token text field
 		this.txtEnterBotToken = new JTextField();
 		final GridBagConstraints gbc_txtEnterBotToken = new GridBagConstraints();
@@ -98,6 +102,7 @@ public class BotFrame extends JFrame {
 		gbc_txtEnterBotToken.gridy = 2;
 		this.contentPane.add(this.txtEnterBotToken, gbc_txtEnterBotToken);
 		this.txtEnterBotToken.setColumns(10);
+
 		final JLabel lblNewLabel_2 = new JLabel("Enter HTTP proxies");
 		lblNewLabel_2.setBackground(Color.DARK_GRAY);
 		lblNewLabel_2.setForeground(Color.CYAN);
@@ -115,6 +120,7 @@ public class BotFrame extends JFrame {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 4;
 		this.contentPane.add(scrollPane, gbc_scrollPane);
+
 		// proxies text area
 		final JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
@@ -131,6 +137,7 @@ public class BotFrame extends JFrame {
 				}
 			}
 		});
+
 		final JLabel lblNewLabel_3 = new JLabel("Message Content");
 		lblNewLabel_3.setBackground(Color.DARK_GRAY);
 		lblNewLabel_3.setForeground(Color.CYAN);
@@ -148,6 +155,7 @@ public class BotFrame extends JFrame {
 		gbc_scrollPane_1.gridx = 0;
 		gbc_scrollPane_1.gridy = 6;
 		this.contentPane.add(scrollPane_1, gbc_scrollPane_1);
+
 		// message content text area
 		final JTextArea msgArea = new JTextArea();
 		scrollPane_1.setViewportView(msgArea);
@@ -160,6 +168,7 @@ public class BotFrame extends JFrame {
 		gbc_lblNewLabel_4.gridx = 0;
 		gbc_lblNewLabel_4.gridy = 7;
 		this.contentPane.add(lblNewLabel_4, gbc_lblNewLabel_4);
+
 		final JButton btnNewButton_3 = new JButton("Start Raid");
 		btnNewButton_3.setForeground(Color.CYAN);
 		btnNewButton_3.setBackground(Color.DARK_GRAY);
@@ -176,6 +185,7 @@ public class BotFrame extends JFrame {
 				(BotFrame.this.t1 = new Thread(BotFrame.this.r)).start();
 			}
 		});
+
 		// server id text field
 		this.txtEnterServerId = new JTextField();
 		final GridBagConstraints gbc_txtEnterServerId = new GridBagConstraints();
@@ -195,24 +205,50 @@ public class BotFrame extends JFrame {
 		gbc_lblNewLabel_5.gridx = 0;
 		gbc_lblNewLabel_5.gridy = 9;
 		this.contentPane.add(lblNewLabel_5, gbc_lblNewLabel_5);
+
+		// mass ban exemption text area
 		final JScrollPane scrollPane_2 = new JScrollPane();
 		final GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
 		gbc_scrollPane_2.gridwidth = 2;
-		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_2.fill = 1;
 		gbc_scrollPane_2.gridx = 0;
 		gbc_scrollPane_2.gridy = 10;
 		this.contentPane.add(scrollPane_2, gbc_scrollPane_2);
-		// mass ban exemption text area
 		scrollPane_2.setViewportView(this.MBE = new JTextArea());
+
+		JLabel lblNewLabel_1 = new JLabel("Output");
+		lblNewLabel_1.setForeground(Color.CYAN);
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.gridwidth = 2;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 11;
+		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+
+		JScrollPane scrollPane_3 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_3 = new GridBagConstraints();
+		gbc_scrollPane_3.gridwidth = 2;
+		gbc_scrollPane_3.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_3.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_3.gridx = 0;
+		gbc_scrollPane_3.gridy = 12;
+		contentPane.add(scrollPane_3, gbc_scrollPane_3);
+
+		// output box text area
+		JTextArea textArea_output = new JTextArea();
+		PrintStream ps = new PrintStream(new OutputStreamRedirect(textArea_output));
+		System.setOut(ps);
+		System.setErr(ps);
+		scrollPane_3.setViewportView(textArea_output);
 		final GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton_1.gridx = 0;
-		gbc_btnNewButton_1.gridy = 11;
+		gbc_btnNewButton_1.gridy = 13;
 		this.contentPane.add(btnNewButton_3, gbc_btnNewButton_1);
 		final GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.gridx = 1;
-		gbc_btnNewButton_2.gridy = 11;
+		gbc_btnNewButton_2.gridy = 13;
 		this.contentPane.add(btnNewButton_2, gbc_btnNewButton_2);
 	}
 }
