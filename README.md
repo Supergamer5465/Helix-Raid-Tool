@@ -30,3 +30,38 @@ Please make sure to follow this guide so that you do not use the raid tool impro
   
 </details>
 
+<details>
+<summary>GUI information</summary>
+
+![image](https://user-images.githubusercontent.com/64598162/114188992-52582680-990f-11eb-8e3d-39c50a8107ba.png)
+
+Enter your bot token here like in the above image
+
+![image](https://user-images.githubusercontent.com/64598162/114189232-9814ef00-990f-11eb-8331-67ed3f2b857d.png)
+
+Enter your bot tokens on each line with `proxy:port`, do not leave an empty line at the bottom.
+
+![image](https://user-images.githubusercontent.com/64598162/114189596-f9d55900-990f-11eb-8430-7f29bcf5dce7.png)
+
+Type anything in the message content box. It must be within 2000 characters, which is discord's character limit for sending messages.
+
+![image](https://user-images.githubusercontent.com/64598162/114189744-25f0da00-9910-11eb-889a-17ea1481e503.png)
+
+![image](https://user-images.githubusercontent.com/64598162/114190136-939d0600-9910-11eb-8ed9-1fac1808ce26.png)
+
+Enter the server ID. It can be obtained by turning on Settings > Advanced > Developer Mode in the discord client, right clicking the target server, and clicking "copy ID"
+
+![image](https://user-images.githubusercontent.com/64598162/114190218-b16a6b00-9910-11eb-9f5c-cee169a72ed8.png)
+![image](https://user-images.githubusercontent.com/64598162/114190675-2d64b300-9911-11eb-89dd-65650cad20cb.png)
+
+The nuke bot includes a mass banning feature, the mass ban exemption box can be left empty if you are willing to let those who are not admin become banned by the bot.
+
+![image](https://user-images.githubusercontent.com/64598162/114191281-dd3a2080-9911-11eb-9811-90e497324204.png)
+
+You do not need to do anything with the output box, it is just the console output.
+
+![image](https://user-images.githubusercontent.com/64598162/114191400-fc38b280-9911-11eb-994b-67e37774e18e.png)
+
+Quite self-explanatory here. Start raid: starts the raid, Stop raid: abruptly stops the raid.
+
+</details>
