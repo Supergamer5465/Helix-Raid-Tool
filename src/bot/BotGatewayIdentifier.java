@@ -33,12 +33,14 @@ public class BotGatewayIdentifier implements Runnable {
 				// identify to discord api gateway
 				this.ws.sendText(identify, false);
 				Thread.sleep(5000L);
+
+				// get heartbeat interval
 				if (BotGatewayIdentifier.intervalMsg.indexOf("\"op\":10") != -1) {
 					final int intervalPos = BotGatewayIdentifier.intervalMsg.indexOf("\"heartbeat_interval\":");
 					String intervalTemp = BotGatewayIdentifier.intervalMsg.substring(intervalPos + 21);
 					final int intervalEndpoint = intervalTemp.indexOf(",");
 					intervalTemp = intervalTemp.substring(0, intervalEndpoint);
-					System.out.println(intervalTemp);
+					System.out.println("Heartbeat Interval: " + intervalTemp + " ms");
 					this.interval = Integer.parseInt(intervalTemp);
 				}
 			} else {

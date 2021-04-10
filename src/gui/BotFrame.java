@@ -112,6 +112,8 @@ public class BotFrame extends JFrame {
 		gbc_lblNewLabel_2.gridx = 0;
 		gbc_lblNewLabel_2.gridy = 3;
 		this.contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+
+		// proxies text area
 		final JScrollPane scrollPane = new JScrollPane();
 		final GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridwidth = 2;
@@ -120,10 +122,10 @@ public class BotFrame extends JFrame {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 4;
 		this.contentPane.add(scrollPane, gbc_scrollPane);
-
-		// proxies text area
 		final JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
+
+		// stop raid button
 		final JButton btnNewButton_2 = new JButton("Stop Raid");
 		btnNewButton_2.setForeground(Color.CYAN);
 		btnNewButton_2.setBackground(Color.DARK_GRAY);
@@ -169,6 +171,7 @@ public class BotFrame extends JFrame {
 		gbc_lblNewLabel_4.gridy = 7;
 		this.contentPane.add(lblNewLabel_4, gbc_lblNewLabel_4);
 
+		// start raid button
 		final JButton btnNewButton_3 = new JButton("Start Raid");
 		btnNewButton_3.setForeground(Color.CYAN);
 		btnNewButton_3.setBackground(Color.DARK_GRAY);
@@ -180,6 +183,22 @@ public class BotFrame extends JFrame {
 				BotFrame.this.sID = BotFrame.this.txtEnterServerId.getText();
 				BotFrame.this.msgC = msgArea.getText();
 				BotFrame.this.MBEl = BotFrame.this.MBE.getText();
+				if (token == null || token == "") {
+					System.out.println("Missing Token");
+					return;
+				}
+				if (proxies == null || proxies == "") {
+					System.out.println("Missing Proxies");
+					return;
+				}
+				if (sID == null || sID == "") {
+					System.out.println("Missing Server ID");
+					return;
+				}
+				if (msgC == null || msgC == "") {
+					System.out.println("Missing Message Content");
+					return;
+				}
 				BotFrame.this.r = new BotRaidFunc(BotFrame.this.token, BotFrame.this.proxies, BotFrame.this.sID,
 						BotFrame.this.msgC, BotFrame.this.MBEl);
 				(BotFrame.this.t1 = new Thread(BotFrame.this.r)).start();
