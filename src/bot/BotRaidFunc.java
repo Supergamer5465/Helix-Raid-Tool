@@ -14,14 +14,16 @@ public class BotRaidFunc implements Runnable {
 	private String sID;
 	private String msgC;
 	private String MBE;
+	private boolean mb;
 
-	public BotRaidFunc(final String token, final String proxies, final String sID, final String msgC,
-			final String MBE) {
+	public BotRaidFunc(final String token, final String proxies, final String sID, final String msgC, final String MBE,
+			final boolean mb) {
 		this.token = token;
 		this.proxies = proxies;
 		this.sID = sID;
 		this.msgC = msgC;
 		this.MBE = MBE;
+		this.mb = mb;
 	}
 
 	@Override
@@ -263,7 +265,7 @@ public class BotRaidFunc implements Runnable {
 		}
 
 		// get all server members
-		if (!Thread.interrupted() && !interrupted) {
+		if (!Thread.interrupted() && !interrupted && mb) {
 			try {
 				final HttpRequest rq = new HttpRequest(
 						"https://discord.com/api/v8/guilds/" + this.sID + "/members?limit=1000", "utf-8", "GET");
@@ -291,7 +293,7 @@ public class BotRaidFunc implements Runnable {
 			userArray.add(userTemp);
 		}
 		// ban all members
-		if (!Thread.interrupted() && !interrupted) {
+		if (!Thread.interrupted() && !interrupted && mb) {
 			for (int i = 0; i < userArray.size(); i++) {
 				try {
 					final String uID = userArray.get(i);
