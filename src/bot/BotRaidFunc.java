@@ -26,6 +26,10 @@ public class BotRaidFunc implements Runnable {
 
 	@Override
 	public void run() {
+
+		// System.out.println(this.token + "\n" + this.proxies + "\n" + this.sID + "\n"
+		// + this.msgC + "\n" + this.MBE);
+
 		// identify to gateway (otherwise bot cannot send msg's)
 		Runnable r = new BotGatewayIdentifier(this.token);
 		final Thread t0 = new Thread(r);

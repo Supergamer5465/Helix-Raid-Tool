@@ -60,6 +60,10 @@ public class HttpRequest {
 	}
 
 	public String finish() throws IOException {
+		if (this.con.getRequestProperty("User-Agent") == null) {
+			this.con.setRequestProperty("User-Agent", "DiscordBot (https://www.google.com, 1.0)");
+		}
+
 		String response = "";
 		if (this.postData != null) {
 			final byte[] postDataBytes = this.getParamsByte();
