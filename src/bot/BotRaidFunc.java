@@ -36,7 +36,7 @@ public class BotRaidFunc implements Runnable {
 		Runnable r = new BotGatewayIdentifier(this.token);
 		final Thread t0 = new Thread(r);
 		t0.start();
-		boolean interrupted = true;
+		boolean interrupted = false;
 		// split proxy string (a big string separated by \n's) into array
 		final String[] pArray = this.proxies.split("\n");
 		// split mass ban exemption id's in the same way proxies are split
