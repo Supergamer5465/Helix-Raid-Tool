@@ -2,12 +2,12 @@
 package bot;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
+import com.neovisionaries.ws.client.WebSocketFrame;
 import com.neovisionaries.ws.client.WebSocketListener;
 
 public class BotGatewayIdentifier implements Runnable {
@@ -19,8 +19,6 @@ public class BotGatewayIdentifier implements Runnable {
 	private WebSocket ws;
 	private String token;
 
-	private static List<WebSocketListener> listenerList;
-
 	public BotGatewayIdentifier(final String token) {
 		this.sequence = 3;
 		this.token = token;
@@ -28,36 +26,14 @@ public class BotGatewayIdentifier implements Runnable {
 
 	@Override
 	public void run() {
-		Runnable r = new BotGatewayIdentifier(this.token);
 		try {
 			if (!Thread.interrupted() && !this.interrupted) {
-
-				// add listeners
-				listenerList.add((WebSocketListener) new WebSocketAdapter() {
-					@Override
-					public void onTextMessage(final WebSocket websocket, final String message) {
-						if (message != null) {
-							System.out.println(message);
-							BotGatewayIdentifier.response = message;
-							if (BotGatewayIdentifier.response.indexOf("\"op\":10") != -1) {
-								BotGatewayIdentifier.intervalMsg = message;
-							}
-						}
-					}
-				});
-				listenerList.add((WebSocketListener) new WebSocketAdapter() {
-					public void onDisconnected(final WebSocket websocket) {
-						Thread t = new Thread(r);
-						t.start();
-						Thread.currentThread().interrupt();
-					}
-				});
 
 				this.ws = connect();
 				final String identify = "{\r\n    \"op\": 2,\r\n    \"d\": {\r\n        \"token\": \"" + this.token
 						+ "\",\r\n        \"properties\": {\r\n            \"$os\": \"linux\",\r\n            \"$browser\": \"discord\",\r\n            \"$device\": \"discord\"\r\n        }\r\n    },\r\n    \"s\": null,\r\n    \"t\": null\r\n}";
 				// identify to discord api gateway
-				this.ws.sendText(identify, false);
+				this.ws.sendText(identify);
 				Thread.sleep(5000L);
 
 				// get heartbeat interval
@@ -74,10 +50,12 @@ public class BotGatewayIdentifier implements Runnable {
 			}
 			// send heartbeat message once per interval
 			while (!this.interrupted && !Thread.interrupted()) {
+				System.out.println("gateway identification thread sleeping for: " + this.interval + " ms");
 				Thread.sleep(this.interval);
 				final String heartbeat = "{\"op\": 1,\"d\": " + this.sequence + "}";
-				this.ws.sendText(heartbeat, false);
+				this.ws.sendText(heartbeat);
 				++this.sequence;
+				System.out.println("sent gateway heartbeat");
 			}
 			this.interrupted = true;
 			this.ws.disconnect();
@@ -91,9 +69,29 @@ public class BotGatewayIdentifier implements Runnable {
 
 	// connect to websocket using websocket client from
 	// https://github.com/TakahikoKawasaki/nv-websocket-client
-	private static WebSocket connect() throws IOException, WebSocketException {
+	private WebSocket connect() throws IOException, WebSocketException {
 		return new WebSocketFactory().setConnectionTimeout(5000)
-				.createSocket("wss://gateway.discord.gg/?v=6&encoding=json").addListeners(listenerList)
-				.addExtension("permessage-deflate").connect();
+				.createSocket("wss://gateway.discord.gg/?v=6&encoding=json")
+				.addListener((WebSocketListener) new WebSocketAdapter() {
+					@Override
+					public void onTextMessage(final WebSocket websocket, final String message) {
+						if (message != null) {
+							System.out.println(message);
+							BotGatewayIdentifier.response = message;
+							if (BotGatewayIdentifier.response.indexOf("\"op\":10") != -1) {
+								BotGatewayIdentifier.intervalMsg = message;
+							}
+						}
+					}
+				}).addListener((WebSocketListener) new WebSocketAdapter() {
+					@Override
+					public void onDisconnected(WebSocket websocket, WebSocketFrame serverCloseFrame,
+							WebSocketFrame clientCloseFrame, boolean closedByServer) throws Exception {
+						Runnable r = new BotGatewayIdentifier(token);
+						Thread t = new Thread(r);
+						t.start();
+						Thread.currentThread().interrupt();
+					}
+				}).addExtension("permessage-deflate").connect();
 	}
 }
