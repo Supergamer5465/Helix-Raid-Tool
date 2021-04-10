@@ -51,10 +51,11 @@ Type anything in the message content box. It must be within 2000 characters, whi
 
 Enter the server ID. It can be obtained by turning on Settings > Advanced > Developer Mode in the discord client, right clicking the target server, and clicking "copy ID"
 
+![image](https://user-images.githubusercontent.com/64598162/114276382-fe6f3f80-99eb-11eb-9db1-d213beac54a5.png)
 ![image](https://user-images.githubusercontent.com/64598162/114190218-b16a6b00-9910-11eb-9f5c-cee169a72ed8.png)
 ![image](https://user-images.githubusercontent.com/64598162/114190675-2d64b300-9911-11eb-89dd-65650cad20cb.png)
 
-The nuke bot includes a mass banning feature, the mass ban exemption box can be left empty if you are willing to let those who are not admin become banned by the bot.
+The nuke bot includes a mass banning feature, the mass ban exemption box can be left empty if you are willing to let those who are not admin become banned by the bot or "Enable Mass Ban" is not selected.
 
 ![image](https://user-images.githubusercontent.com/64598162/114191281-dd3a2080-9911-11eb-9811-90e497324204.png)
 
